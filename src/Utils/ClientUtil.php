@@ -14,7 +14,7 @@ class ClientUtil
     {
         return Constants::URI_PROTOCOL . '://'
             . $username . ':' . $password . '@'
-            . (($isDevMode === true) ? Constants::URI_DOMAIN_DEV : Constants::URI_DOMAIN_PROD) . DIRECTORY_SEPARATOR
+            . (($isDevMode === true) ? Constants::URI_DOMAIN_DEV : Constants::URI_DOMAIN_PROD) . '/'
             . $path
             . (( ! empty($query)) ? '?' . http_build_query($query) : '');
     }
