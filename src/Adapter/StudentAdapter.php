@@ -149,13 +149,13 @@ class StudentAdapter extends BaseAdapter
         if ($name != '') {
             $query['name'] = $name;
         }
-        if ($name != '') {
+        if ($billKey != '') {
             $query['bill_key'] = $billKey;
         }
-        if ($name != '') {
+        if ($offset != '') {
             $query['offset'] = $offset;
         }
-        if ($name != '') {
+        if ($limit != '') {
             $query['limit'] = $limit;
         }
 
