@@ -63,6 +63,15 @@ class BaseAdapter implements AdapterInterface
         $this->buildResponse($this->httpClient->put($uri, $headers, $body));
     }
 
+    protected function httpDel($uri, array $headers = array(), $body = null)
+    {
+        if ( ! empty($body)) {
+            $body = (is_array($body)) ? json_encode($body) : $body;
+            $headers = array_merge(array('Content-Type: application/json','Content-Length: ' . strlen($body)));
+        }
+        $this->buildResponse($this->httpClient->delete($uri, $headers, $body));
+    }
+
     public function getResponseCode()
     {
         return $this->httpResponseCode;

@@ -53,30 +53,48 @@ class ClientTest extends TestCase
     {
         $idnClient = new ApiClient\Client($this->username, $this->password);
         $idnClient->setDevMode();
-        $idnClient->studentApi()->createBill('Test User 123', '123' . date('YMDhis'), '08123123456', 'use.only@valid.email', 'Testing', $this->billingData());
+        $idnClient->studentApi()->createBill('Test User 123', '123' . date('YMDhi'), '08123123456', 'use.only@valid.email', 'Testing', $this->billingData());
         $this->assertEquals(201, $idnClient->studentApi()->getResponseCode());
+    }
+
+    public function testGetBilling()
+    {
+        $idnClient = new ApiClient\Client($this->username, $this->password);
+        $idnClient->setDevMode();
+        $idnClient->studentApi()->getStudentBills('123' . date('YMDhi'));
+        $this->assertEquals(200, $idnClient->studentApi()->getResponseCode());
+    }
+
+    public function testDeleteStudent()
+    {
+        $idnClient = new ApiClient\Client($this->username, $this->password);
+        $idnClient->setDevMode();
+        foreach($this->studentsData() as $key => $val) {
+            $idnClient->studentApi()->deleteStudent($val['billKeyValue']);
+            $this->assertEquals(200, $idnClient->studentApi()->getResponseCode());
+        }
     }
 
     private function studentsData()
     {
         return array(
             array(
-                'name' => 'test User 0001' . date('YMDhis'),
-                'billKeyValue' => '0001'. date('YMDhis'),
+                'name' => 'test User 0001' . date('YMDhi'),
+                'billKeyValue' => '0001'. date('YMDhi'),
                 'phone' => '081231230001',
                 'email' => 'use.only@valid.domain',
                 'description' => 'Testing user #0001',
             ),
             array(
-                'name' => 'test User 0002' . date('YMDhis'),
-                'billKeyValue' => '0002' . date('YMDhis'),
+                'name' => 'test User 0002' . date('YMDhi'),
+                'billKeyValue' => '0002' . date('YMDhi'),
                 'phone' => '081231230002',
                 'email' => 'use.only@valid.domain',
                 'description' => 'Testing user #0002',
             ),
             array(
-                'name' => 'test User 0003' . date('YMDhis'),
-                'billKeyValue' => '0003' . date('YMDhis'),
+                'name' => 'test User 0003' . date('YMDhi'),
+                'billKeyValue' => '0003' . date('YMDhi'),
                 'phone' => '081231230003',
                 'email' => 'use.only@valid.domain',
                 'description' => 'Testing user #0003',

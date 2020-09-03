@@ -100,6 +100,24 @@ class StudentAdapter extends BaseAdapter
         return $this;
     }
 
+    public function deleteStudent($billKeyValue)
+    {
+        if ($billKeyValue == "") {
+            return $this;
+        }
+
+        $uri = $this->getUtils()->buildUri(
+            $this->getMainEntity()->getUsername(),
+            $this->getMainEntity()->getPassword(),
+            'bill/' . $billKeyValue,
+            array(),
+            $this->getMainEntity()->isDevMode()
+        );
+        $this->httpDel($uri, array());
+
+        return $this;
+    }
+
     public function appendBillComponentData($billKey, $accountCode, $billComponentName, $amount, $expiryDate, $dueDate, $activeDate = '', $penaltyAmount  = 0, $notes = '')
     {
         $this->billComponentData[] = array(
@@ -218,7 +236,6 @@ class StudentAdapter extends BaseAdapter
             array(),
             $this->getMainEntity()->isDevMode()
         );
-
         $this->httpPost($uri, array(), $content);
 
         return $this;
