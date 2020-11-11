@@ -194,7 +194,7 @@ class StudentAdapter extends BaseAdapter
         $uri = $this->getUtils()->buildUri(
             $this->getMainEntity()->getUsername(),
             $this->getMainEntity()->getPassword(),
-            'bill',
+            'bill_component/search/bill',
             $query,
             $this->getMainEntity()->isDevMode()
         );
