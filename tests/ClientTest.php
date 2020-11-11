@@ -19,7 +19,7 @@ class ClientTest extends TestCase
     {
         $idnClient = new ApiClient\Client($this->username, $this->password);
         $idnClient->setDevMode();
-        $idnClient->studentApi()->createStudent('Test User 1234' . date('YMDhis'), 'testBillKey01234' . date('YMDhis'),'0987612345', 'use.only@valid.domain', 'This is test to create user');
+        $idnClient->studentApi()->createStudent('test User 0000' . date('YMDhi'), '0000' . date('YMDhi'), '0987612345', 'use.only@valid.domain', 'This is test to create user');
         $this->assertEquals(201, $idnClient->studentApi()->getResponseCode());
 
     }
@@ -53,7 +53,7 @@ class ClientTest extends TestCase
     {
         $idnClient = new ApiClient\Client($this->username, $this->password);
         $idnClient->setDevMode();
-        $idnClient->studentApi()->createBill('Test User 123', '123' . date('YMDhi'), '08123123456', 'use.only@valid.email', 'Testing', $this->billingData());
+        $idnClient->studentApi()->createBill('test User 0004' . date('YMDhi'), '0004' . date('YMDhi'), '08123123456', 'use.only@valid.email', 'Testing', $this->billingData());
         $this->assertEquals(201, $idnClient->studentApi()->getResponseCode());
     }
 
@@ -61,7 +61,7 @@ class ClientTest extends TestCase
     {
         $idnClient = new ApiClient\Client($this->username, $this->password);
         $idnClient->setDevMode();
-        $idnClient->studentApi()->getStudentBills('123' . date('YMDhi'));
+        $idnClient->studentApi()->getStudentBills('0000' . date('YMDhi'));
         $this->assertEquals(200, $idnClient->studentApi()->getResponseCode());
     }
 
@@ -73,6 +73,15 @@ class ClientTest extends TestCase
             $idnClient->studentApi()->deleteStudent($val['billKeyValue']);
             $this->assertEquals(200, $idnClient->studentApi()->getResponseCode());
         }
+    }
+
+    public function testGetBills()
+    {
+        $idnClient = new ApiClient\Client($this->username, $this->password);
+        $idnClient->setDevMode();
+        $idnClient->studentApi()->getBills(array());
+        $result = $idnClient->studentApi()->getResponse();
+        $this->assertEquals(200, $idnClient->studentApi()->getResponseCode());
     }
 
     private function studentsData()
@@ -108,7 +117,7 @@ class ClientTest extends TestCase
         $newTime = date('Y-m-d\TH:i:s\Z',$time);
         return array(
             array(
-                'account_code' => "MANDIRI",
+                'account_code' => "TESTAKUN",
                 'bill_component_name' => 'Test',
                 'expiry_date' => $newTime,
                 'due_date' => $newTime,
