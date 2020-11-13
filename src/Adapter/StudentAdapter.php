@@ -191,10 +191,13 @@ class StudentAdapter extends BaseAdapter
 
     public function getBills($query = array())
     {
+        if (isset($query['bill_key'])) {
+            return $this->getStudentBills($query["bill_key"], $query);
+        }
         $uri = $this->getUtils()->buildUri(
             $this->getMainEntity()->getUsername(),
             $this->getMainEntity()->getPassword(),
-            'bill_component/search/bill',
+            'bill_component/search/biller',
             $query,
             $this->getMainEntity()->isDevMode()
         );
